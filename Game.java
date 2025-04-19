@@ -55,7 +55,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
         int ticks = 0;
         long timer = System.currentTimeMillis();
 
-        while (running) {
+        while (running) { try {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
@@ -77,8 +77,11 @@ public class Game extends Canvas implements Runnable, KeyListener {
                 frames = 0;
                 ticks = 0;
             }
+        }catch (Exception e) {
+            e.printStackTrace();  // Print the error stack trace
+            stop();
         }
-        stop();
+      }
     }
 
     private void tick() {
@@ -135,5 +138,6 @@ public class Game extends Canvas implements Runnable, KeyListener {
         // Not needed for this example
     }
 }
+
 
 
