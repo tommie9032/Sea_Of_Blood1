@@ -27,7 +27,7 @@ public class UI {
         arial_30 = new Font("Arial",Font.PLAIN,30);
         arial_80B = new Font("Arial",Font.BOLD,80);
 
-        Obj_key key = new Obj_key();
+        Obj_key key = new Obj_key(gp);
         keyImage = key.image;
 
     }

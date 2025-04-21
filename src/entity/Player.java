@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,19 +42,27 @@ public class Player extends Entity{
         direction = "down";
     }
     public void getPlayerImage(){
-        try{
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/c_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/c_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/c_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/c_down_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/c_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/c_right_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/c_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/c_left_2.png"));
 
-        }catch (IOException e) {
-            e.printStackTrace();
+        up1 = setup("c_up_1");
+        up2 = setup("c_up_2");
+        down1 = setup("c_down_1");
+        down2 = setup("c_down_2");
+        right1 = setup("c_right_1");
+        right2 = setup("c_right_2");
+        left1 = setup("c_left_1");
+        left2 = setup("c_left_2");
+    }
+    public BufferedImage setup(String imageName){
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+        try{
+            image = ImageIO.read(getClass().getResourceAsStream("/player/"+imageName+".png"));
+            image = uTool.scaleImage(image,gp.tileSize,gp.tileSize);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+        return image;
     }
     public void update(){
 
@@ -178,7 +187,7 @@ public class Player extends Entity{
 
         };
 
-        g2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+        g2.drawImage(image,screenX,screenY,null);
     }
 
 }

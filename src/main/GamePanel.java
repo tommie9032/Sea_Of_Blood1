@@ -36,6 +36,12 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this,keyH);
     public SuperObject obj[] = new SuperObject[10];
 
+    //Game State
+    public int gameState;
+    public final int playState = 1;
+    public final int puaseState = 2;
+
+
 
     //World Setting
     public final int maxWorldCol = 50;
@@ -58,7 +64,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame(){
+
         aSetter.setObject();
+        gameState = playState;
     }
 
 
@@ -91,7 +99,14 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
     public void update(){
-        player.update();
+        if(gameState == playState){
+            player.update();
+
+        }
+
+        if(gameState == playState){
+
+        }
 
     }
 
