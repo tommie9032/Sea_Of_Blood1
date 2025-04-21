@@ -16,7 +16,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
 
-    public int hasKey = 0;
+    //public int hasKey = 0;
 
     public Player(GamePanel gp,KeyHandler keyH){
         this.gp = gp;
@@ -87,7 +87,7 @@ public class Player extends Entity{
             }
 
             collisionOn = false;
-            gp.cChecker.checkTile(this);
+            //gp.cChecker.checkTile(this);
 
             //Check object Collision
             int objIndex = gp.cChecker.checkObject(this,true);
@@ -115,34 +115,6 @@ public class Player extends Entity{
     public void pickUpObject(int  i){
         if(i != 999){
 
-            String objectName = gp.obj[i].name;
-
-            switch(objectName){
-                case "Key":
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.ui.showMessage("You got a Key!!");
-                    break;
-                case "Door":
-                    if(hasKey > 0) {
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.ui.showMessage("You opened a Door!!");
-                    }
-                    else {
-                        gp.ui.showMessage("Not enough Keys!!");
-                    }
-                    break;
-
-                case "Chest":
-                    gp.ui.gameFinished = true;
-                    break;
-
-
-
-
-
-            }
         }
 
     }
@@ -185,9 +157,29 @@ public class Player extends Entity{
                 }
                 break;
 
-        };
+        }
+        int x = screenX;
+        int y = screenY;
 
-        g2.drawImage(image,screenX,screenY,null);
+        if(screenX > worldX){
+            x = worldX;
+        }
+        if(screenY > worldY){
+            y = worldY;
+        }
+        int rightOffset = gp.screenWidth - screenX;
+
+        if(rightOffset > gp.worldWidth - worldX){
+            x = gp.screenWidth - (gp.worldWidth - worldX);
+        }
+
+        int bottomOffSet = gp.screenHeight - screenY;
+        if(bottomOffSet > gp.worldHeight - worldY){
+            y = gp.screenHeight - (gp.worldHeight - worldY);
+        }
+
+
+        g2.drawImage(image,x,y,null);
     }
 
 }

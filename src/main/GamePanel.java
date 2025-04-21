@@ -29,7 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
 
     public UI ui = new UI(this);
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(this);
 
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     //Game State
     public int gameState;
     public final int playState = 1;
-    public final int puaseState = 2;
+    public final int pauseState = 2;
 
 
 
@@ -48,6 +48,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxWorldRow = 50;
     public final int worldWidth = tileSize * maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
+
+
 
 
 
@@ -104,7 +106,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
 
-        if(gameState == playState){
+        if(gameState == pauseState){
 
         }
 
