@@ -32,6 +32,7 @@ public class Entity {
     public boolean collisionOn = false;
 
     public int actionLockCounter = 0;
+    String[] dialogues = new String[20];
 
 
     public Entity(GamePanel gp){
@@ -39,17 +40,20 @@ public class Entity {
     }
 
     public void setAction(){}
+    public void speak(){}
     public void update(){
         setAction();
 
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this,false);
+        gp.cChecker.checkPlayer(this);
 
         if(collisionOn == false){
             switch(direction){
                 case "up":worldY -= speed;break;
                 case "down":worldY += speed;break;
-                case ";eft":worldX -= speed;break;
+                case "left":worldX -= speed;break;
                 case "right":worldX += speed;break;
 
             }

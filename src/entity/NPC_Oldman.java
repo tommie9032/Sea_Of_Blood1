@@ -13,7 +13,8 @@ public class NPC_Oldman extends Entity{
         super(gp);
         direction = "down";
         speed = 1;
-        getImage();;
+        getImage();
+        setDialogue();
 
 
     }
@@ -27,6 +28,10 @@ public class NPC_Oldman extends Entity{
         right2 = setup("/npc/oldman_right_2.png");
         left1 = setup("/npc/oldman_left_1.png");
         left2 = setup("/npc/oldman_left_2.png");
+    }
+
+    public void setDialogue(){
+        dialogues[0]="Hello Soldier, its good to see you!!";
     }
 
     public void setAction(){
@@ -52,6 +57,10 @@ public class NPC_Oldman extends Entity{
             actionLockCounter = 0;
 
         }
+
+    }
+    public void speak(){
+        gp.ui.currentDialogue =  dialogues[0];
 
     }
 

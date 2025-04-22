@@ -18,6 +18,8 @@ public class UI {
     int messageCounter = 0;
 
     public boolean gameFinished = false;
+    public String currentDialogue = "";
+
     double playTime;
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
@@ -28,8 +30,7 @@ public class UI {
         arial_30 = new Font("Arial",Font.PLAIN,30);
         arial_80B = new Font("Arial",Font.BOLD,80);
 
-        //Obj_key key = new Obj_key(gp);
-        //keyImage = key.image;
+
 
     }
     public void showMessage(String text){
@@ -50,6 +51,10 @@ public class UI {
             drawPauseScreeen();
         }
 
+        if(gp.gameState == gp.dialogueState){
+            drawDialogueScreen();
+        }
+
 
     }
 
@@ -63,6 +68,33 @@ public class UI {
 
         g2.drawString(text,x,y);
 
+    }
+
+    public void drawDialogueScreen(){
+        int x;
+        int y;
+        int width;
+        int height;
+        x = gp.tileSize*2;
+        y=gp.tileSize/2;
+        width = gp.screenWidth - (gp.tileSize*4);
+        height = gp.tileSize * 4;
+
+        drawSubWindow(x,y,width,height);
+
+        x+= gp.tileSize;
+        y += gp.tileSize;
+        g2.drawString(currentDialogue,x,y);
+    }
+
+    public void drawSubWindow(int x,int y,int width, int height){
+        Color c = new Color(0,0,0,200);
+        g2.setColor(c);
+        g2.fillRoundRect(x,y,width,height,35,35);
+        c = new Color(255,255,255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
     }
     public int getXforCentredText(String text){
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
